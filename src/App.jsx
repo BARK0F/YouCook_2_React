@@ -1,5 +1,11 @@
+import Routes from "./routes/index.jsx";
+
 function App() {
-  return <h1>Hello World!</h1>;
+  return (
+    <main className="container">
+      <Routes />
+    </main>
+  );
 }
 
 export default App;
