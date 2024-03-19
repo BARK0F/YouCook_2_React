@@ -9,5 +9,5 @@ export function getLogoutUrl() {
 }
 
 export function getRegisterUrl() {
-  return `${BASE_URL}/register?redirect=`
+  return `${BASE_URL}/register?redirect=${encodeURIComponent(window.location.href)}`;
 }
