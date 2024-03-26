@@ -3,10 +3,22 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/flowbite/**/*.js",
   ],
   theme: {
     extend: {},
   },
-  plugins: [require("flowbite/plugin")],
+  daisyui: {
+    themes:  [
+      {
+        youcook: {
+          "primary": "#db5555",
+          "secondary": "#58fa88",
+          "accent": "#37cdbe",
+          "neutral": "#3d4451",
+          "base-100": "#ffffff",
+        },
+      },
+    ]
+  },
+  plugins: [require('daisyui')],
 };
