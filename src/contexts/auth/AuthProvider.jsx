@@ -10,7 +10,7 @@ export default function AuthProvider({ children }) {
       .then((data) => {
         setUser(data);
       })
-      .then(() => {
+      .catch(() => {
         setUser(null);
       })
   }, []);
