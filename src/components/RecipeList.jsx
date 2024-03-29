@@ -10,6 +10,9 @@ export default function RecipeList() {
       setRecipesData(data["hydra:member"]);
     });
   }, []);
+  if (!recipesData) {
+    return <p>fetch en cours</p>;
+  }
   return (
     <section className="flex flex-wrap justify-center">
       {recipesData.map((recipe) => (
