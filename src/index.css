@@ -5,3 +5,11 @@
 .badge:hover{
     background-color: rgba(0,0,0,0.1);
 }
+.bouton{
+    background-color: gray;
+    border-radius: 15%;
+}
+.chanpForm{
+    border: black 2px;
+    background-color: gray;
+}
