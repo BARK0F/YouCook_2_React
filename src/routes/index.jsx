@@ -1,15 +1,16 @@
 import { Route, Switch } from "wouter";
+import React from "react";
+import RecipeList from "../components/RecipeList";
+import RecipeDetail from "../views/RecipeDetail";
+import NotFound from "../views/NotFound";
 
 export default function Routes() {
   return (
     <Switch>
-      {/* eslint-disable-next-line react/react-in-jsx-scope */}
-      <Route
-        path="/"
-        component={() => <h1>Home</h1>}
-      />
-      /* Default | 404 Not found */
-      <Route component={() => <h1>404 Not Found</h1>} />
+      <Route path="/" component={NotFound} />
+      <Route path="/recipes" component={RecipeList} />
+      <Route path="/recipes/:id" component={RecipeDetail} />
+      <Route component={NotFound} />
     </Switch>
   );
 }

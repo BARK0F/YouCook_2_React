@@ -2,7 +2,7 @@ const BASE_URL = "http://localhost:8000/api";
 
 export function fetchUser() {
   return fetch(`${BASE_URL}/me`, {
-    credentials: "include"
+    credentials: "include",
   }).then((res) => {
     if (res.status > 400) {
       throw new Error("Not logged in");
