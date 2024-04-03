@@ -55,6 +55,12 @@ export default function RecipeDetail({ params: { id } }) {
                 {recipe.description ?? "Description de la recette"}
               </p>
             </div>
+            <div>
+              <h4 className="text-xl">Ustensiles utilisés :</h4>
+              <div className="m-2">
+                <ToolsList tools={recipe.tools} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
