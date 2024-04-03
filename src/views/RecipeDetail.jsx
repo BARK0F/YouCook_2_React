@@ -34,6 +34,23 @@ export default function RecipeDetail({ params: { id } }) {
             </Badge>
           </div>
         </div>
+        <div className="flex">
+          <div className="w-1/2" />
+          <div className="w-1/2">
+            <div className="flex flex-wrap">
+              <h4 className="text-xl">Informations sur la recette :</h4>
+              <div className="flex flex-wrap">
+                <div className="flex flex-wrap">
+                  <Badge>{recipe.nbDay} jour(s)</Badge>
+                  <Badge>{recipe.nbHour} heure(s)</Badge>
+                  <Badge>{recipe.nbMinute} minute(s)</Badge>
+                </div>
+                <Badge>{recipe.nbPeople} personne(s)</Badge>
+                <Badge>Difficulté : {recipe.difficulty}</Badge>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     )
   );
