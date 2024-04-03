@@ -1,13 +1,15 @@
-import Routes from "./routes/index.jsx";
-import Navbar from "./components/layout/Navbar.jsx";
-import AuthProvider from "./contexts/auth/AuthProvider.jsx";
+import Routes from "./routes/index";
+import Navbar from "./components/layout/Navbar";
+import AuthProvider from "./contexts/auth/AuthProvider";
+import RecipeForm from "./components/RecipeForm";
 
 function App() {
   return (
-      <AuthProvider>
-        <Navbar />
-        <Routes />
-      </AuthProvider>
+    <AuthProvider>
+      <Navbar />
+      <Routes />
+      <RecipeForm />
+    </AuthProvider>
   );
 }
 
