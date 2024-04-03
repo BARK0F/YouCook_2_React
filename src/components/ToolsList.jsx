@@ -9,7 +9,7 @@ export default function ToolsList({ tools }) {
 }
 
 ToolsList.propTypes = {
-  tools: PropTypes.shape(),
+  tools: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 ToolsList.defaultProps = {
