@@ -61,6 +61,12 @@ export default function RecipeDetail({ params: { id } }) {
                 <ToolsList tools={recipe.tools} />
               </div>
             </div>
+            <div className="flex flex-wrap">
+              <h4 className="text-xl">Ingrédients :</h4>
+              <div className="m-2">
+                <ConstitutesList constitutes={recipe.constitutes} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
