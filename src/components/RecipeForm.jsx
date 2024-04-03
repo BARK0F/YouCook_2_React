@@ -174,10 +174,10 @@ function RecipeForm() {
                         value={ingredient.unit}
                         onChange={(e) => handleIngredientChange(e, index)}
                     />
-                    <button type="button" onClick={() => removeIngredient(index)}>Supprimer</button>
+                    <button type="button" className="delete-btn" onClick={() => removeIngredient(index)}>Supprimer</button>
                 </div>
             ))}
-            <button type="button" className="submit-btn" onClick={addIngredient}>Ajouter Ingrédient</button>
+            <button type="button" className="append-btn" onClick={addIngredient}>Ajouter Ingrédient</button>
             <label>Étapes:</label>
             {formData.steps.map((step, index) => (
                 <div key={index}>
@@ -194,10 +194,10 @@ function RecipeForm() {
                         value={step.description}
                         onChange={(e) => handleStepChange(e, index)}
                     />
-                    <button type="button" onClick={() => removeStep(index)}>Supprimer</button>
+                    <button type="button" className="delete-btn" onClick={() => removeStep(index)}>Supprimer</button>
                 </div>
             ))}
-            <button type="button" className="submit-btn" onClick={addStep}>Ajouter Étape</button>
+            <button type="button" className="append-btn" onClick={addStep}>Ajouter Étape</button>
 
             <br/><br/><button className="submit-btn" type="submit">Submit</button>
         </form>
