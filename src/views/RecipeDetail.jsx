@@ -13,7 +13,11 @@ export default function RecipeDetail({ params: { id } }) {
   if (!recipe) {
     return <p>fetch en cours</p>;
   }
-
+  let sum = 0;
+  recipe.marks.map((mark) => {
+    sum += mark.mark;
+  });
+  sum /= recipe.marks.length;
   return (
     recipe && (
       <div>
@@ -21,6 +25,14 @@ export default function RecipeDetail({ params: { id } }) {
           <h1 className="align-top text-2xl text-center">
             {recipe.name ?? "Nom de la recette"}
           </h1>
+          <div className="flex justify-between">
+            <Badge className="float-left">
+              Note : {sum !== undefined ? sum.toFixed(1) : "X.X"}
+            </Badge>
+            <Badge className="float-right">
+              Auteur : {recipe.author.firstname} {recipe.author.lastname}
+            </Badge>
+          </div>
         </div>
       </div>
     )
