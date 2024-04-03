@@ -1,5 +1,12 @@
 import { Route, Switch } from "wouter";
+<<<<<<< src/routes/index.jsx
 import ToolNewItem from "../views/ToolNewItem.jsx";
+=======
+import React from "react";
+import RecipeList from "../components/RecipeList";
+import RecipeDetail from "../views/RecipeDetail";
+import NotFound from "../views/NotFound";
+>>>>>>> src/routes/index.jsx
 
 export default function Routes() {
   return (
@@ -14,8 +21,10 @@ export default function Routes() {
         path="/tools/new"
         component={ToolNewItem}
       />
-      /* Default | 404 Not found */
-      <Route component={() => <h1>404 Not Found</h1>} />
+      <Route path="/" component={NotFound} />
+      <Route path="/recipes" component={RecipeList} />
+      <Route path="/recipes/:id" component={RecipeDetail} />
+      <Route component={NotFound} />
     </Switch>
   );
 }
