@@ -49,6 +49,12 @@ export default function RecipeDetail({ params: { id } }) {
                 <Badge>Difficulté : {recipe.difficulty}</Badge>
               </div>
             </div>
+            <div>
+              <h4 className="text-xl">Description :</h4>
+              <p className="m-2">
+                {recipe.description ?? "Description de la recette"}
+              </p>
+            </div>
           </div>
         </div>
       </div>
