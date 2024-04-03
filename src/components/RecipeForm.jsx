@@ -11,7 +11,6 @@ function RecipeForm() {
         Minutes: '',
         Description: '',
         Image: ''
-
     });
 
     const handleChange = (e) => {
@@ -29,8 +28,8 @@ function RecipeForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="recipeName">RecipeName:</label>
+        <form onSubmit={handleSubmit} className="recipe-form">
+            <label htmlFor="recipeName">Nom de la Recette:</label>
             <input
                 type="text"
                 id="recipeName"
@@ -38,7 +37,7 @@ function RecipeForm() {
                 value={formData.recipeName}
                 onChange={handleChange}
             />
-            <br/><br/><label htmlFor="CategorieDeRecette">CategorieDeRecette:</label>
+            <br/><br/><label htmlFor="CategorieDeRecette">Categorie:</label>
             <input
                 type="text"
                 id="CategorieDeRecette"
@@ -46,15 +45,19 @@ function RecipeForm() {
                 value={formData.CategorieDeRecette}
                 onChange={handleChange}
             />
-            <br/><br/><label htmlFor="Difficulte">Difficulte:</label>
-            <input
-                type="text"
+            <br/><br/><label htmlFor="Difficulte">Difficulté:</label>
+            <select
                 id="Difficulte"
                 name="Difficulte"
                 value={formData.Difficulte}
                 onChange={handleChange}
-            />
-            <br/><br/><label htmlFor="NbPersonnes">NbPersonnes:</label>
+            >
+                <option value="">Difficulté</option>
+                <option value="EASY">Easy</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HARD">Hard</option>
+            </select>
+            <br/><br/><label htmlFor="NbPersonnes">Nombre de Personnes:</label>
             <input
                 type="number"
                 id="NbPersonnes"
@@ -64,7 +67,7 @@ function RecipeForm() {
             />
             <br/><br/><label htmlFor="Jour">Jour:</label>
             <input
-                type="Jour"
+                type="text"
                 id="Jour"
                 name="Jour"
                 value={formData.Jour}
@@ -87,23 +90,21 @@ function RecipeForm() {
                 onChange={handleChange}
             />
             <br/><br/><label htmlFor="Description">Description:</label>
-            <input
-                type="number"
+            <textarea
                 id="Description"
                 name="Description"
                 value={formData.Description}
                 onChange={handleChange}
             />
-            <br/><br/><label  htmlFor="Image">Image:</label>
+            <br/><br/><label htmlFor="Image">Image:</label>
             <input
-                type="image"
+                type="file"
                 id="Image"
                 name="Image"
-                value={formData.Image}
                 onChange={handleChange}
-                className={"chanpForm"}
-              alt={"inserer image"}/>
-            <br/><br/><button className="btn bouton" type="submit">Submit</button>
+                className="upload-btn"
+            />
+            <br/><br/><button className="submit-btn" type="submit">Submit</button>
         </form>
     );
 }
