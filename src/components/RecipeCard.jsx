@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export default function RecipeCard({ recipe }) {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 max-w-sm m-4">
-      <a href={`recipes/${recipe.id}`}>
+      <a href={recipe.id}>
         <h5 className="text-lg font-bold mb-2">
           {recipe.name ?? "Nom de recette non existant"}
         </h5>
