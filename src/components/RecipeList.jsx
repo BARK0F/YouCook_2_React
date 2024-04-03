@@ -14,10 +14,15 @@ export default function RecipeList() {
     return <p>fetch en cours</p>;
   }
   return (
-    <section className="flex flex-wrap justify-center">
-      {recipesData.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
-      ))}
-    </section>
+    <div>
+      <h1 className="text-4xl font-bold text-center mt-4">
+        Liste des recettes
+      </h1>
+      <section className="flex flex-wrap justify-center">
+        {recipesData.map((recipe) => (
+          <RecipeCard key={recipe.id} recipe={recipe} />
+        ))}
+      </section>
+    </div>
   );
 }
