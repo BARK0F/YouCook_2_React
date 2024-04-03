@@ -10,7 +10,8 @@ function RecipeForm() {
         Heures: '',
         Minutes: '',
         Description: '',
-        ingredients: [] // Ajout du tableau pour stocker les ingrédients
+        ingredients: [], // Ajout du tableau pour stocker les ingrédients
+        steps: []
     });
 
     const handleChange = (e) => {
@@ -46,6 +47,33 @@ function RecipeForm() {
             ingredients: updatedIngredients
         });
     };
+
+    const handleStepChange = (e, index) => {
+        const { name, value } = e.target;
+        const updatedSteps = [...formData.steps];
+        updatedSteps[index][name] = value;
+        setFormData({
+            ...formData,
+            steps: updatedSteps
+        });
+    };
+
+    const addStep = () => {
+        setFormData({
+            ...formData,
+            steps: [...formData.steps, { name: '', description: '' }]
+        });
+    };
+
+    const removeStep = (index) => {
+        const updatedSteps = [...formData.steps];
+        updatedSteps.splice(index, 1);
+        setFormData({
+            ...formData,
+            steps: updatedSteps
+        });
+    };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -150,6 +178,27 @@ function RecipeForm() {
                 </div>
             ))}
             <button type="button" className="submit-btn" onClick={addIngredient}>Ajouter Ingrédient</button>
+            <label>Étapes:</label>
+            {formData.steps.map((step, index) => (
+                <div key={index}>
+                    <input
+                        type="text"
+                        name="Nom de l'étape"
+                        placeholder="Description de l'étape"
+                        value={step.name}
+                        onChange={(e) => handleStepChange(e, index)}
+                    />
+                    <textarea
+                        name="duration"
+                        placeholder="Description"
+                        value={step.description}
+                        onChange={(e) => handleStepChange(e, index)}
+                    />
+                    <button type="button" onClick={() => removeStep(index)}>Supprimer</button>
+                </div>
+            ))}
+            <button type="button" className="submit-btn" onClick={addStep}>Ajouter Étape</button>
+
             <br/><br/><button className="submit-btn" type="submit">Submit</button>
         </form>
     );
