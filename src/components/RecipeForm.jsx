@@ -10,7 +10,7 @@ function RecipeForm() {
         Heures: '',
         Minutes: '',
         Description: '',
-        Image: ''
+        ingredients: [] // Ajout du tableau pour stocker les ingrédients
     });
 
     const handleChange = (e) => {
@@ -18,6 +18,32 @@ function RecipeForm() {
         setFormData({
             ...formData,
             [name]: value
+        });
+    };
+
+    const handleIngredientChange = (e, index) => {
+        const { name, value } = e.target;
+        const updatedIngredients = [...formData.ingredients];
+        updatedIngredients[index][name] = value;
+        setFormData({
+            ...formData,
+            ingredients: updatedIngredients
+        });
+    };
+
+    const addIngredient = () => {
+        setFormData({
+            ...formData,
+            ingredients: [...formData.ingredients, { name: '', quantity: '', unit: '' }]
+        });
+    };
+
+    const removeIngredient = (index) => {
+        const updatedIngredients = [...formData.ingredients];
+        updatedIngredients.splice(index, 1);
+        setFormData({
+            ...formData,
+            ingredients: updatedIngredients
         });
     };
 
@@ -96,14 +122,34 @@ function RecipeForm() {
                 value={formData.Description}
                 onChange={handleChange}
             />
-            <br/><br/><label htmlFor="Image">Image:</label>
-            <input
-                type="file"
-                id="Image"
-                name="Image"
-                onChange={handleChange}
-                className="upload-btn"
-            />
+            <br/><br/><label>Ingrédients:</label>
+            {formData.ingredients.map((ingredient, index) => (
+                <div key={index}>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Nom de l'ingrédient"
+                        value={ingredient.name}
+                        onChange={(e) => handleIngredientChange(e, index)}
+                    />
+                    <input
+                        type="text"
+                        name="quantity"
+                        placeholder="Quantité"
+                        value={ingredient.quantity}
+                        onChange={(e) => handleIngredientChange(e, index)}
+                    />
+                    <input
+                        type="text"
+                        name="unit"
+                        placeholder="Unité de mesure"
+                        value={ingredient.unit}
+                        onChange={(e) => handleIngredientChange(e, index)}
+                    />
+                    <button type="button" onClick={() => removeIngredient(index)}>Supprimer</button>
+                </div>
+            ))}
+            <button type="button" className="submit-btn" onClick={addIngredient}>Ajouter Ingrédient</button>
             <br/><br/><button className="submit-btn" type="submit">Submit</button>
         </form>
     );
