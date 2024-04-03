@@ -13,6 +13,10 @@ export default function RecipeCard({ recipe }) {
             auteur: {recipe?.author ? recipe.author : "Auteur non existant"}
           </div>
           <div>note: {recipe?.mark ? recipe.mark : "Aucune Note"}</div>
+        <div className="flex flex-row content">
+          <Badge className="float-right">
+            Auteur : {recipe.author.firstname} {recipe.author.lastname}
+          </Badge>
         </div>
       </a>
     </div>
