@@ -37,7 +37,7 @@ RecipeCard.propTypes = {
     nbDay: PropTypes.number,
     nbHour: PropTypes.number,
     nbMinute: PropTypes.number,
-    marks: PropTypes.shape(),
+    marks: PropTypes.arrayOf(PropTypes.shape()),
     author: PropTypes.shape(),
   }),
 };

@@ -16,10 +16,7 @@ export default function ConstitutesList({ constitutes }) {
 }
 
 ConstitutesList.propTypes = {
-  constitutes: PropTypes.shape({
-    constitute: PropTypes.shape(),
-    map: PropTypes.shape(),
-  }),
+  constitutes: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 ConstitutesList.defaultProps = {
