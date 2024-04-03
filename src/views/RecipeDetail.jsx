@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Badge from "../components/Badge";
-import { fetchRecipe } from "../services/recipes";
+import { fetchRecipe } from "../services/api/recipes";
 import ToolsList from "../components/ToolsList";
 import ConstitutesList from "../components/ConstitutesList";
 

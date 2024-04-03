@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchAllRecipes } from "../services/recipes";
+import { fetchAllRecipes } from "../services/api/recipes";
 import RecipeCard from "./RecipeCard";
 
 export default function RecipeList() {
