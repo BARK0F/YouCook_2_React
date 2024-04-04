@@ -1,23 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function Step({ numStep, name, description }) {
+export default function Step({ step, numStep }) {
   return (
-    <div>
-      <h4>Etape {numStep}</h4>
-      <p>{name}</p>
-      <p>{description}</p>
+    <div className="flex flex-col">
+      <h3 className="font-bold text-xl">Etape {numStep+1}</h3>
+        <div className="flex-row ml-2 text-justify">
+            <p className="text-lg underline ml-4">{step.name}</p>
+            <p className="ml-7">{step.description}</p>
+        </div>
     </div>
   );
 }
 Step.propTypes = {
-  numStep: PropTypes.number,
-  name: PropTypes.string,
-  description: PropTypes.string,
+    step: PropTypes.shape({
+        name: PropTypes.string,
+        description: PropTypes.string,
+    }),
+    numStep: PropTypes.number,
 };
 
 Step.defaultProps = {
-  numStep: 0,
-  name: "default",
-  description: "default",
+    step: [],
+    numStep: 0
 };
