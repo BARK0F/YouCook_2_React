@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import ConstituteItem from "./ConstituteItem";
 
 export default function ConstitutesList({ constitutes }) {
+  if (constitutes.length === 0) {
+    return <p>Aucun ingrédient utilisé</p>;
+  }
   return (
     <div className="flex flex-wrap justify-between">
       {constitutes.map((constitute) => (
