@@ -1,10 +1,13 @@
-import Routes from "./routes/index.jsx";
+import Routes from "./routes/index";
+import Navbar from "./components/layout/Navbar";
+import AuthProvider from "./contexts/auth/AuthProvider";
 
 function App() {
   return (
-    <main className="container">
+    <AuthProvider>
+      <Navbar />
       <Routes />
-    </main>
+    </AuthProvider>
   );
 }
 
