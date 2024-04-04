@@ -1,12 +1,9 @@
 import { Route, Switch } from "wouter";
-<<<<<<< src/routes/index.jsx
 import ToolNewItem from "../views/ToolNewItem.jsx";
-=======
 import React from "react";
 import RecipeList from "../components/RecipeList";
 import RecipeDetail from "../views/RecipeDetail";
 import NotFound from "../views/NotFound";
->>>>>>> src/routes/index.jsx
 
 export default function Routes() {
   return (
