@@ -4,6 +4,7 @@ import Badge from "../components/Badge";
 import { fetchRecipe } from "../services/api/recipes";
 import ToolsList from "../components/ToolsList";
 import ConstitutesList from "../components/ConstitutesList";
+import Image from "../components/Image.jsx";
 
 export default function RecipeDetail({ params: { id } }) {
   const [recipe, setRecipe] = useState();
@@ -35,7 +36,9 @@ export default function RecipeDetail({ params: { id } }) {
           </div>
         </div>
         <div className="flex">
-          <div className="w-1/2" />
+          <div className="w-1/3 m-10 flex justify-center">
+            <Image source={"../../public/img/recipe-default.png"}></Image>
+          </div>
           <div className="w-1/2">
             <div className="flex flex-wrap">
               <h4 className="text-xl">Informations sur la recette :</h4>
