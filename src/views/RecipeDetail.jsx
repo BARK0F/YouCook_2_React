@@ -37,7 +37,7 @@ export default function RecipeDetail({ params: { id } }) {
         </div>
         <div className="flex">
           <div className="w-1/3 m-10 flex justify-center">
-            <Image source={"/img/recipe-default.png"}></Image>
+            <Image source="/img/recipe-default.png" />
           </div>
           <div className="w-1/2">
             <div className="flex flex-wrap">
