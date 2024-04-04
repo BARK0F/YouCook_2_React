@@ -12,10 +12,14 @@ export default function Navbar() {
           Youcook
         </Link>
       </div>
-      <div className="flex-none gap-2">
-        <div className="form-control">
+      <div className="flex-none gap-2 w-3/4">
+        <div className="form-control w-2/3">
           <label className="input input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Search" />
+            <input
+              type="text"
+              className="grow justify-center"
+              placeholder="Search"
+            />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -30,7 +34,7 @@ export default function Navbar() {
             </svg>
           </label>
         </div>
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-end w-1/3 flex justify-end">
           <div
             tabIndex={0}
             role="button"
