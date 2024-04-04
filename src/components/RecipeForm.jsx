@@ -50,6 +50,7 @@ function RecipeForm() {
     formDataRecipe.set('difficulty', formData.Difficulte)
     formDataRecipe.set('description', formData.Description)
     formDataRecipe.set('category', `/api/recipes_categories/${selectedCategory}`)
+    formDataRecipe.set('author', `/api/users/${user.id}`)
     formDataRecipe.set('nbDay', formData.Jour)
     formDataRecipe.set('nbHour', formData.Heures)
     formDataRecipe.set('nbMinute', formData.Minutes);
