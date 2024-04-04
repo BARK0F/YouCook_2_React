@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Badge from "./Badge";
+import Image from "./Image";
 
 export default function RecipeCard({ recipe }) {
   let sum = 0;
@@ -11,6 +12,7 @@ export default function RecipeCard({ recipe }) {
   return (
     <div className="bg-white rounded-lg shadow-md p-4 max-w-sm m-4">
       <a href={recipe.id}>
+        <Image source={"/img/recipe-default.png"}></Image>
         <h5 className="text-lg font-bold mb-2">
           {recipe.name ?? "Nom de recette non existant"}
         </h5>
