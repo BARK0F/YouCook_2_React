@@ -32,3 +32,8 @@ export function createStep(payload) {
     body: payload
   }).then(res => res.json())
 }
+
+export function getRecipeCategories() {
+  return fetch(`${BASE_URL}/recipes_categories`)
+      .then((res) => res.json());
+}
