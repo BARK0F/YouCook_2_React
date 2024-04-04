@@ -10,8 +10,8 @@ export function getIngredientDetail(id) {
   );
 }
 
-export function createIngredient(payload){
-  return fetch(`${BASE_URL}/ingredients`, {
+export function createConstitute(payload){
+  return fetch(`${BASE_URL}/constitutes`, {
     credentials: "include",
     method: "POST",
     body: payload,
