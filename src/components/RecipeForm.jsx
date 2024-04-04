@@ -1,7 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { AuthContext } from "../contexts/auth/AuthContext.js";
 import { getLoginUrl } from "../services/api/auth.js";
-import { createIngredient } from "../services/api/ingredient.js";
+import {createConstitute, fetchAllIngredients} from "../services/api/ingredient.js";
+import {useLocation} from "wouter";
+import {createRecipe, createStep} from "../services/api/recipes.js";
 
 function RecipeForm() {
   const [formData, setFormData] = useState({
@@ -16,6 +18,8 @@ function RecipeForm() {
     ingredients: [], // Ajout du tableau pour stocker les ingrédients
     steps: [],
   });
+    const [selectedValues, setSelectedValues] = useState([])
+    const [location, setLocation] = useLocation();
 
   const user = useContext(AuthContext);
 
@@ -23,18 +27,71 @@ function RecipeForm() {
     window.location.href = getLoginUrl();
   }
 
+    const [ingredients, setIngredients] = useState([])
+
+    useEffect(() => {
+        fetchAllIngredients()
+            .then((data) => {
+                setIngredients(data['hydra:member'])
+            });
+    }, []);
+
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // TODO: ingredients creation
+    const formDataRecipe = new FormData();
 
-    const formDataIngr = new FormData();
+    formDataRecipe.set('name', formData.recipeName)
+    formDataRecipe.set('difficulty', formData.Difficulte)
+    formDataRecipe.set('description', formData.Description)
+    formDataRecipe.set('nbDay', formData.Jour)
+    formDataRecipe.set('nbHour', formData.Heures)
+    formDataRecipe.set('nbMinute', formData.Minutes);
+    formDataRecipe.set('nbPeople', formData.NbPersonnes)
 
-    formData.ingredients.map((ingrdient) => {
-      formDataIngr.set('name', )
+    const payloadRecipe = Object.fromEntries(formDataRecipe);
+
+    ['nbDay', 'nbHour', 'nbMinute', 'nbPeople'].forEach((fieldNumber) => {
+        payloadRecipe[fieldNumber] = parseInt(payloadRecipe[fieldNumber])
     })
 
-    createIngredient()
+      createRecipe(JSON.stringify(payloadRecipe))
+          .then((recipeData) => {
+              const formDataIngr = new FormData();
+
+              formData.ingredients.map((ingredient, index) => {
+                  formDataIngr.set('ingredient', `/api/ingredients/${selectedValues[index]['index']}`)
+                  formDataIngr.set('quantity', parseInt(ingredient.quantity))
+                  formDataIngr.set('measure', ingredient.unit)
+                  formDataIngr.set('recipe', `/api/recipes/${recipeData.id}`)
+
+                  const payload = Object.fromEntries(formDataIngr);
+
+                  payload.quantity = parseInt(payload.quantity);
+
+                  createConstitute(JSON.stringify(payload))
+                      .then((constituteData) => {
+                          console.log("constitute created ", constituteData.id)
+                      })
+              })
+
+              const formDataStep = new FormData();
+
+              formData.steps.map((step, index) => {
+                  formDataStep.set('name', step.name)
+                  formDataStep.set('description', step.duration)
+                  formDataStep.set('recipe', `/api/recipes/${recipeData.id}`)
+
+                  const payloadStep = JSON.stringify(Object.fromEntries(formDataStep));
+
+                  createStep(payloadStep).then((dataStep) => console.log("Created step ", dataStep.id))
+              })
+          })
+
+
+    // TODO: ingredients creation
+
+    //createIngredient()
   }
 
   const handleChange = (e) => {
@@ -63,7 +120,21 @@ function RecipeForm() {
         { name: "", quantity: "", unit: "" },
       ],
     });
+    setSelectedValues([
+        ...selectedValues,
+        {index: '1'}
+    ])
   };
+
+  const selectOnChange = (e, index) => {
+    if (selectedValues.length <= index) {
+        setSelectedValues([{index: '1'}])
+        return
+    }
+    selectedValues[index]['index'] = e.target.value;
+    setSelectedValues(selectedValues)
+
+  }
 
   const removeIngredient = (index) => {
     const updatedIngredients = [...formData.ingredients];
@@ -107,7 +178,7 @@ function RecipeForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="recipe-form">
+    <form onSubmit={onSubmit} className="recipe-form">
       <label htmlFor="recipeName">Nom de la Recette:</label>
       <input
         type="text"
@@ -194,15 +265,13 @@ function RecipeForm() {
       <label>Ingrédients:</label>
       {formData.ingredients.map((ingredient, index) => (
         <div key={index}>
+            <select defaultValue={selectedValues[index]} name="name" onChange={(e) => selectOnChange(e, index)}>
+                {ingredients.map(ingr => (
+                    <option key={ingr.id} value={ingr.id}>{ingr.name}</option>
+                ))}
+            </select>
           <input
-            type="text"
-            name="name"
-            placeholder="Nom de l'ingrédient"
-            value={ingredient.name}
-            onChange={(e) => handleIngredientChange(e, index)}
-          />
-          <input
-            type="text"
+            type="number"
             name="quantity"
             placeholder="Quantité"
             value={ingredient.quantity}
