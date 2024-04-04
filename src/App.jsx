@@ -8,7 +8,6 @@ function App() {
     <AuthProvider>
       <Navbar />
       <Routes />
-      <RecipeForm />
     </AuthProvider>
   );
 }
