@@ -1,10 +1,16 @@
-import UserButton from "../molecule/UserButton.jsx";
+import { Link } from "wouter";
+import UserButton from "../molecule/UserButton";
 
 export default function Navbar() {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a href={"/"} className="btn btn-ghost text-xl font-extrabold text-primary">Youcook</a>
+        <Link
+          className="btn btn-ghost text-xl font-extrabold text-primary"
+          href="/"
+        >
+          Youcook
+        </Link>
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
