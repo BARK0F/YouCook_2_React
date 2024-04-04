@@ -5,6 +5,7 @@ import { fetchRecipe } from "../services/api/recipes";
 import ToolsList from "../components/ToolsList";
 import ConstitutesList from "../components/ConstitutesList";
 import Image from "../components/Image.jsx";
+import StepList from "../components/StepList.jsx";
 
 export default function RecipeDetail({ params: { id } }) {
   const [recipe, setRecipe] = useState();
@@ -36,8 +37,14 @@ export default function RecipeDetail({ params: { id } }) {
           </div>
         </div>
         <div className="flex">
-          <div className="w-1/3 m-10 flex justify-center">
-            <Image source="/img/recipe-default.png" />
+          <div className="w-1/3 m-10 flex flex-col">
+            <div className="flex justify-center">
+              <Image source="/img/recipe-default.png" />
+            </div>
+            <div>
+              <h4>Etapes à suivre</h4>
+              <StepList StepsData={recipe.steps} />
+            </div>
           </div>
           <div className="w-1/2">
             <div className="flex flex-wrap">
@@ -54,7 +61,7 @@ export default function RecipeDetail({ params: { id } }) {
             </div>
             <div>
               <h4 className="text-xl">Description :</h4>
-              <p className="m-2">
+              <p className="m-2 text-justify">
                 {recipe.description ?? "Description de la recette"}
               </p>
             </div>
