@@ -4,7 +4,7 @@ export default function Navbar({ children }) {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl font-extrabold text-primary">Youcook</a>
+        <a href={"/"} className="btn btn-ghost text-xl font-extrabold text-primary">Youcook</a>
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
