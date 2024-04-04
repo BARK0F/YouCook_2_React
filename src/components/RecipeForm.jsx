@@ -3,12 +3,11 @@ import { AuthContext } from "../contexts/auth/AuthContext.js";
 import { getLoginUrl } from "../services/api/auth.js";
 import {createConstitute, fetchAllIngredients} from "../services/api/ingredient.js";
 import {useLocation} from "wouter";
-import {createRecipe, createStep} from "../services/api/recipes.js";
+import {createRecipe, createStep, getRecipeCategories} from "../services/api/recipes.js";
 
 function RecipeForm() {
   const [formData, setFormData] = useState({
     recipeName: "",
-    CategorieDeRecette: "",
     Difficulte: "",
     NbPersonnes: "",
     Jour: "",
@@ -18,6 +17,8 @@ function RecipeForm() {
     ingredients: [], // Ajout du tableau pour stocker les ingrédients
     steps: [],
   });
+    const [categories, setCategories] = useState([])
+    const [selectedCategory, setSelectedCategory] = useState('1')
     const [selectedValues, setSelectedValues] = useState([])
     const [location, setLocation] = useLocation();
 
@@ -34,6 +35,10 @@ function RecipeForm() {
             .then((data) => {
                 setIngredients(data['hydra:member'])
             });
+        getRecipeCategories()
+            .then((data) => {
+                setCategories(data['hydra:member'])
+            })
     }, []);
 
   const onSubmit = (e) => {
@@ -44,6 +49,7 @@ function RecipeForm() {
     formDataRecipe.set('name', formData.recipeName)
     formDataRecipe.set('difficulty', formData.Difficulte)
     formDataRecipe.set('description', formData.Description)
+    formDataRecipe.set('category', `/api/recipes_categories/${selectedCategory}`)
     formDataRecipe.set('nbDay', formData.Jour)
     formDataRecipe.set('nbHour', formData.Heures)
     formDataRecipe.set('nbMinute', formData.Minutes);
@@ -84,7 +90,9 @@ function RecipeForm() {
 
                   const payloadStep = JSON.stringify(Object.fromEntries(formDataStep));
 
-                  createStep(payloadStep).then((dataStep) => console.log("Created step ", dataStep.id))
+                  createStep(payloadStep).then((dataStep) => {
+                      setLocation(`/recipes/${recipeData.id}`)
+                  })
               })
           })
 
@@ -162,6 +170,10 @@ function RecipeForm() {
     });
   };
 
+  const handleChangeCategory = (e) => {
+      setSelectedCategory(e.target.value)
+  }
+
   const removeStep = (index) => {
     const updatedSteps = [...formData.steps];
     updatedSteps.splice(index, 1);
@@ -190,13 +202,9 @@ function RecipeForm() {
       <br />
       <br />
       <label htmlFor="CategorieDeRecette">Categorie:</label>
-      <input
-        type="text"
-        id="CategorieDeRecette"
-        name="CategorieDeRecette"
-        value={formData.CategorieDeRecette}
-        onChange={handleChange}
-      />
+        <select defaultValue={selectedCategory} onChange={handleChangeCategory} name="CategorieDeRecette" id="CategorieDeRecette">
+            {categories.map(category => <option value={category.id} key={category.id}>{category.name}</option>)}
+        </select>
       <br />
       <br />
       <label htmlFor="Difficulte">Difficulté:</label>
