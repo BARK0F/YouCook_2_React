@@ -1,6 +1,6 @@
 import UserButton from "../molecule/UserButton.jsx";
 
-export default function Navbar({ children }) {
+export default function Navbar() {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
